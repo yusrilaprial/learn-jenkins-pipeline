@@ -123,3 +123,34 @@ pipeline {
     }
 }
 ```
+
+## Steps
+
+Steps are the individual tasks that are executed within a stage. They can include shell commands, scripts, or built-in Jenkins functions. Here’s an example of using steps in a pipeline:
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                echo 'Compiling source code...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running unit tests...'
+                echo 'Checking code quality...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to production...'
+                echo 'Notifying stakeholders...'
+            }
+        }
+    }
+}
+```
