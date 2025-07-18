@@ -1,6 +1,15 @@
 pipeline {
     agent any
-    
+
+    options {
+        buildDiscarder(logRotator(
+            daysToKeepStr: '10',
+            numToKeepStr: '5',
+            artifactDaysToKeepStr: '3',
+            artifactNumToKeepStr: '2'
+        ))
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -18,6 +27,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
+                sh '''
+                    sudo mkdir -p /var/www/jenkins/app
+                    sudo rsync -avz . /var/www/jenkins/app
+                '''
             }
         }
     }
